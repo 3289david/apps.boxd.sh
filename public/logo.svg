@@ -1,0 +1,15 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- apps.boxd.sh logo mark -->
+  <!-- Orange rounded square background -->
+  <rect width="1024" height="1024" rx="220" fill="#F37338"/>
+
+  <!-- 2×2 grid of dark rounded squares -->
+  <!-- top-left -->
+  <rect x="188" y="188" width="296" height="296" rx="56" fill="#0A0908"/>
+  <!-- top-right -->
+  <rect x="540" y="188" width="296" height="296" rx="56" fill="#0A0908"/>
+  <!-- bottom-left -->
+  <rect x="188" y="540" width="296" height="296" rx="56" fill="#0A0908"/>
+  <!-- bottom-right (faded — suggests openness / growth) -->
+  <rect x="540" y="540" width="296" height="296" rx="56" fill="#0A0908" opacity="0.35"/>
+</svg>
