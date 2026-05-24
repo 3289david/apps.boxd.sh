@@ -1,26 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Font */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* === Color Palette — Dark adaptation of DESIGN.md === */
+  --color-canvas: #0A0908;
+  --color-surface: #131210;
+  --color-elevated: #1E1B18;
+
+  /* Cream text (Canvas Cream #F3F0EE becomes primary text on dark) */
+  --color-cream: #F3F0EE;
+  --color-cream-muted: #9A928A;
+  --color-cream-faint: #504840;
+
+  /* Signal Orange (from DESIGN.md — works perfectly on dark) */
+  --color-orange: #F37338;
+  --color-orange-deep: #CF4500;
+
+  /* Semantic */
+  --color-success: #22C55E;
+
+  /* === Border Radius (from DESIGN.md extreme radius language) === */
+  --radius-icon: 22px;
+  --radius-card: 24px;
+  --radius-card-lg: 32px;
+  --radius-feature: 40px;
+  --radius-pill: 999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================ */
+/* Global base                                                  */
+/* ============================================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0A0908;
+  color: #F3F0EE;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(243, 240, 238, 0.15);
+  border-radius: 999px;
+}
+
+/* ============================================================ */
+/* Utility classes                                              */
+/* ============================================================ */
+
+.scroll-hide { scrollbar-width: none; -ms-overflow-style: none; }
+.scroll-hide::-webkit-scrollbar { display: none; }
+
+.glass {
+  background: rgba(243, 240, 238, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(243, 240, 238, 0.08);
+}
+
+.glass-nav {
+  background: rgba(19, 18, 16, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(243, 240, 238, 0.08);
+}
+
+/* ============================================================ */
+/* Animations                                                   */
+/* ============================================================ */
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-slide-up  { animation: slide-up 0.35s ease-out both; }
+.animate-fade-in   { animation: fade-in 0.3s ease-out both; }
+.animate-scale-in  { animation: scale-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-shimmer   { animation: shimmer 1.6s infinite linear; }
+
+.delay-75  { animation-delay: 75ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+
+/* Press effect */
+.press {
+  transition: transform 0.12s ease, opacity 0.12s ease;
+  cursor: pointer;
+}
+.press:active { transform: scale(0.97); opacity: 0.85; }
+
+/* Hover lift */
+.lift {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(243,240,238,0.06) 25%,
+    rgba(243,240,238,0.12) 50%,
+    rgba(243,240,238,0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 8px;
 }
