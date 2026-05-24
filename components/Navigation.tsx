@@ -15,17 +15,55 @@ function SearchIcon({ size = 18 }: { size?: number }) {
   );
 }
 
+// ── Brand mark — 2×2 grid on orange square ────────────────────────────────────
+
+function GridMark({ size = 26 }: { size?: number }) {
+  const sq  = Math.round(size * 0.30); // inner square size
+  const gap = Math.round(size * 0.10); // gap between squares
+  const pad = Math.round(size * 0.18); // outer padding
+  const r   = Math.round(size * 0.14); // outer corner radius
+  const ri  = Math.round(sq * 0.22);   // inner corner radius
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
+      <rect width={size} height={size} rx={r} fill="#F37338" />
+      {/* top-left */}
+      <rect x={pad}            y={pad}            width={sq} height={sq} rx={ri} fill="#0A0908" />
+      {/* top-right */}
+      <rect x={pad + sq + gap} y={pad}            width={sq} height={sq} rx={ri} fill="#0A0908" />
+      {/* bottom-left */}
+      <rect x={pad}            y={pad + sq + gap} width={sq} height={sq} rx={ri} fill="#0A0908" />
+      {/* bottom-right — faded to suggest "open" / growth */}
+      <rect x={pad + sq + gap} y={pad + sq + gap} width={sq} height={sq} rx={ri} fill="#0A0908" opacity="0.35" />
+    </svg>
+  );
+}
+
 function BoxdLogo() {
   return (
-    <svg width="80" height="22" viewBox="0 0 80 22" fill="none">
-      {/* apps.boxd */}
-      <text x="0" y="17" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="15" letterSpacing="-0.03em" fill="#F3F0EE">
-        apps.
-      </text>
-      <text x="38" y="17" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="15" letterSpacing="-0.03em" fill="#F37338">
-        boxd
-      </text>
-    </svg>
+    <span
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 8,
+        textDecoration: 'none',
+      }}
+    >
+      <GridMark size={26} />
+      <span
+        style={{
+          fontSize: 15,
+          fontWeight: 700,
+          letterSpacing: '-0.025em',
+          lineHeight: 1,
+          fontFamily: 'Inter, ui-sans-serif, sans-serif',
+        }}
+      >
+        <span style={{ color: '#F3F0EE' }}>apps.</span>
+        <span style={{ color: '#F37338' }}>boxd</span>
+        <span style={{ color: 'rgba(243,240,238,0.32)' }}>.sh</span>
+      </span>
+    </span>
   );
 }
 

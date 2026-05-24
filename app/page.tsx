@@ -66,6 +66,74 @@ export default function HomePage() {
   return (
     <div style={{ maxWidth: 980, margin: '0 auto', paddingBottom: 40 }}>
 
+      {/* ── Brand intro strip ── */}
+      <div
+        style={{
+          padding: '0 16px',
+          marginBottom: 28,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
+        <div>
+          <h1
+            style={{
+              fontSize: 13,
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              color: '#F37338',
+              margin: 0,
+              marginBottom: 4,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+          >
+            {/* inline grid mark */}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect width="14" height="14" rx="3" fill="#F37338"/>
+              <rect x="2.5" y="2.5" width="4"  height="4"  rx="1" fill="#0A0908"/>
+              <rect x="7.5" y="2.5" width="4"  height="4"  rx="1" fill="#0A0908"/>
+              <rect x="2.5" y="7.5" width="4"  height="4"  rx="1" fill="#0A0908"/>
+              <rect x="7.5" y="7.5" width="4"  height="4"  rx="1" fill="#0A0908" opacity="0.35"/>
+            </svg>
+            apps.boxd.sh
+          </h1>
+          <p
+            style={{
+              fontSize: 26,
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
+              color: '#F3F0EE',
+              margin: 0,
+              lineHeight: 1.15,
+            }}
+          >
+            App Store for Web Apps
+          </p>
+        </div>
+        <Link
+          href="/browse"
+          style={{
+            flexShrink: 0,
+            padding: '8px 18px',
+            borderRadius: 999,
+            background: 'rgba(243,240,238,0.06)',
+            border: '1px solid rgba(243,240,238,0.1)',
+            fontSize: 13,
+            fontWeight: 500,
+            color: '#9A928A',
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Browse all
+        </Link>
+      </div>
+
       {/* ── Hero: featured banner ── */}
       <FeaturedBanner apps={featured} />
 
