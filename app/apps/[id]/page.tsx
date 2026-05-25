@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getApp, apps, getAppsByCategory, formatRatingCount } from '@/lib/data';
+import { getApp, getApps, getAppsByCategory, formatRatingCount } from '@/lib/data';
 import { AppIcon } from '@/components/AppIcon';
 import { Rating } from '@/components/Rating';
 import { Badge } from '@/components/Badge';
@@ -9,8 +9,10 @@ import { AppCard } from '@/components/AppCard';
 
 interface Props { params: Promise<{ id: string }> }
 
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
-  return apps.map(a => ({ id: a.id }));
+  return getApps().map(a => ({ id: a.id }));
 }
 
 export async function generateMetadata({ params }: Props) {

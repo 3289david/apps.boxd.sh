@@ -5,7 +5,6 @@ import { AppCard } from '@/components/AppCard';
 import { Badge } from '@/components/Badge';
 import Link from 'next/link';
 import {
-  apps,
   getFeaturedApps,
   getTrendingApps,
   getNewApps,
@@ -13,6 +12,8 @@ import {
   getAppsByCategory,
   categoryMeta,
 } from '@/lib/data';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'apps.boxd.sh — App Store for Web Apps',

@@ -86,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 &copy; {new Date().getFullYear()} apps.boxd.sh &nbsp;·&nbsp;
                 <a href="/submit" style={{ color: '#F37338', textDecoration: 'none' }}>Submit an App</a>
                 &nbsp;·&nbsp;
-                <a href="mailto:hello@boxd.sh" style={{ color: '#504840', textDecoration: 'none' }}>Contact</a>
+                <a href="mailto:contact@rukkit.net" style={{ color: '#504840', textDecoration: 'none' }}>Contact</a>
               </p>
             </div>
           </footer>

@@ -34,7 +34,7 @@ export interface CategoryMeta {
   id: Category;
   label: string;
   description: string;
-  icon: string; // Lucide icon name
+  icon: string;
   color: string;
 }
 
@@ -49,30 +49,31 @@ export const categoryMeta: CategoryMeta[] = [
   { id: 'media',         label: 'Media',         description: 'Audio, video & more',      icon: 'Film',         color: '#EF4444' },
 ];
 
-export const apps: App[] = [];
+// All app reads go through the DB at runtime (server-side only)
+import { getAllApps, getAppById as dbGetAppById } from './db';
 
-// ── Helpers ─────────────────────────────────────────────────────────────────
+export const getApps = (): App[] => getAllApps();
 
-export const getApp = (id: string) => apps.find(a => a.id === id);
+export const getApp = (id: string): App | undefined => dbGetAppById(id);
 
-export const getAppsByCategory = (cat: Category) =>
-  apps.filter(a => a.category === cat);
+export const getAppsByCategory = (cat: Category): App[] =>
+  getAllApps().filter(a => a.category === cat);
 
-export const getFeaturedApps = () => apps.filter(a => a.isFeatured);
+export const getFeaturedApps = (): App[] => getAllApps().filter(a => a.isFeatured);
 
-export const getTrendingApps = () => apps.filter(a => a.isTrending);
+export const getTrendingApps = (): App[] => getAllApps().filter(a => a.isTrending);
 
-export const getNewApps = () => apps.filter(a => a.isNew);
+export const getNewApps = (): App[] => getAllApps().filter(a => a.isNew);
 
-export const getOfflineApps = () => apps.filter(a => a.isOfflineReady);
+export const getOfflineApps = (): App[] => getAllApps().filter(a => a.isOfflineReady);
 
-export const getCategoryMeta = (id: Category) =>
+export const getCategoryMeta = (id: Category): CategoryMeta | undefined =>
   categoryMeta.find(c => c.id === id);
 
-export const searchApps = (query: string) => {
+export const searchApps = (query: string): App[] => {
   const q = query.toLowerCase().trim();
   if (!q) return [];
-  return apps.filter(
+  return getAllApps().filter(
     a =>
       a.name.toLowerCase().includes(q) ||
       a.tagline.toLowerCase().includes(q) ||

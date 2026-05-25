@@ -1,11 +1,13 @@
 import Link from 'next/link';
-import { apps, categoryMeta } from '@/lib/data';
+import { getApps, categoryMeta } from '@/lib/data';
 import { AppCard } from '@/components/AppCard';
 import { SectionHeader } from '@/components/SectionHeader';
 
+export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Browse All Apps — apps.boxd.sh' };
 
 export default function BrowsePage() {
+  const apps = getApps();
   const offlineApps  = apps.filter(a => a.isOfflineReady);
   const pwaApps      = apps.filter(a => a.isPWA);
   const trendingApps = apps.filter(a => a.isTrending);
@@ -61,7 +63,7 @@ export default function BrowsePage() {
                   {cat.label}
                 </p>
                 <p style={{ fontSize: 12, color: '#9A928A', marginTop: 2 }}>
-                  {apps.filter(a => a.category === cat.id).length} apps
+                  {getApps().filter(a => a.category === cat.id).length} apps
                 </p>
               </div>
             </Link>
