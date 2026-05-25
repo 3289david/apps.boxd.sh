@@ -135,7 +135,7 @@ export default function HomePage() {
       </div>
 
       {/* ── Hero: featured banner ── */}
-      <FeaturedBanner apps={featured} />
+      {featured.length > 0 && <FeaturedBanner apps={featured} />}
 
       {/* ── Categories horizontal pill row ── */}
       <section style={{ marginBottom: 48, paddingLeft: 16 }}>
@@ -160,13 +160,15 @@ export default function HomePage() {
       </section>
 
       {/* ── Trending ── */}
-      <CategoryRow
-        title="Trending Now"
-        eyebrow="Hot"
-        apps={trending}
-        href="/browse?filter=trending"
-        variant="scroll"
-      />
+      {trending.length > 0 && (
+        <CategoryRow
+          title="Trending Now"
+          eyebrow="Hot"
+          apps={trending}
+          href="/browse?filter=trending"
+          variant="scroll"
+        />
+      )}
 
       {/* ── New Arrivals ── */}
       {newApps.length > 0 && (
@@ -181,125 +183,135 @@ export default function HomePage() {
       )}
 
       {/* ── AI Apps ── */}
-      <CategoryRow
-        title="AI Apps"
-        subtitle="Powered by intelligence"
-        eyebrow="Category"
-        apps={aiApps.slice(0, 8)}
-        href="/category/ai"
-        variant="scroll"
-      />
+      {aiApps.length > 0 && (
+        <CategoryRow
+          title="AI Apps"
+          subtitle="Powered by intelligence"
+          eyebrow="Category"
+          apps={aiApps.slice(0, 8)}
+          href="/category/ai"
+          variant="scroll"
+        />
+      )}
 
       {/* ── Offline Ready — list variant ── */}
-      <section style={{ marginBottom: 48 }}>
-        <SectionHeader
-          title="Works Offline"
-          subtitle="These apps keep working without internet"
-          eyebrow="Offline Ready"
-          href="/browse?filter=offline"
-        />
-        <div style={{ paddingLeft: 16, paddingRight: 16 }}>
-          <div
-            style={{
-              background: '#131210',
-              borderRadius: 24,
-              border: '1px solid rgba(243,240,238,0.06)',
-              overflow: 'hidden',
-            }}
-          >
-            {offline.slice(0, 5).map((app, i) => (
-              <div key={app.id}>
-                <div style={{ padding: '16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <Link href={`/apps/${app.id}`} style={{ textDecoration: 'none', flexShrink: 0 }}>
-                      <div
+      {offline.length > 0 && (
+        <section style={{ marginBottom: 48 }}>
+          <SectionHeader
+            title="Works Offline"
+            subtitle="These apps keep working without internet"
+            eyebrow="Offline Ready"
+            href="/browse?filter=offline"
+          />
+          <div style={{ paddingLeft: 16, paddingRight: 16 }}>
+            <div
+              style={{
+                background: '#131210',
+                borderRadius: 24,
+                border: '1px solid rgba(243,240,238,0.06)',
+                overflow: 'hidden',
+              }}
+            >
+              {offline.slice(0, 5).map((app, i) => (
+                <div key={app.id}>
+                  <div style={{ padding: '16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                      <Link href={`/apps/${app.id}`} style={{ textDecoration: 'none', flexShrink: 0 }}>
+                        <div
+                          style={{
+                            width: 56, height: 56, borderRadius: 14,
+                            background: `linear-gradient(135deg, ${app.iconGradient[0]}, ${app.iconGradient[1]})`,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: 18, fontWeight: 700, color: 'rgba(255,255,255,0.9)',
+                            letterSpacing: '-0.02em',
+                          }}
+                        >
+                          {app.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+                        </div>
+                      </Link>
+                      <Link href={`/apps/${app.id}`} style={{ flex: 1, minWidth: 0, textDecoration: 'none' }}>
+                        <p style={{ fontSize: 15, fontWeight: 600, color: '#F3F0EE', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {app.name}
+                        </p>
+                        <p style={{ fontSize: 12, color: '#9A928A', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {app.tagline}
+                        </p>
+                        <div style={{ display: 'flex', gap: 4, marginTop: 5 }}>
+                          <Badge variant="offline" />
+                          {app.isPWA && <Badge variant="pwa" label="PWA" />}
+                        </div>
+                      </Link>
+                      <a
+                        href={app.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{
-                          width: 56, height: 56, borderRadius: 14,
-                          background: `linear-gradient(135deg, ${app.iconGradient[0]}, ${app.iconGradient[1]})`,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          fontSize: 18, fontWeight: 700, color: 'rgba(255,255,255,0.9)',
-                          letterSpacing: '-0.02em',
+                          flexShrink: 0, padding: '6px 16px', borderRadius: 999,
+                          background: 'rgba(243,240,238,0.1)', color: '#F37338',
+                          fontSize: 12, fontWeight: 600, textDecoration: 'none',
+                          border: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
                         }}
                       >
-                        {app.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()}
-                      </div>
-                    </Link>
-                    <Link href={`/apps/${app.id}`} style={{ flex: 1, minWidth: 0, textDecoration: 'none' }}>
-                      <p style={{ fontSize: 15, fontWeight: 600, color: '#F3F0EE', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {app.name}
-                      </p>
-                      <p style={{ fontSize: 12, color: '#9A928A', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {app.tagline}
-                      </p>
-                      <div style={{ display: 'flex', gap: 4, marginTop: 5 }}>
-                        <Badge variant="offline" />
-                        {app.isPWA && <Badge variant="pwa" label="PWA" />}
-                      </div>
-                    </Link>
-                    <a
-                      href={app.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        flexShrink: 0, padding: '6px 16px', borderRadius: 999,
-                        background: 'rgba(243,240,238,0.1)', color: '#F37338',
-                        fontSize: 12, fontWeight: 600, textDecoration: 'none',
-                        border: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
-                      }}
-                    >
-                      Get
-                    </a>
+                        Get
+                      </a>
+                    </div>
                   </div>
+                  {i < Math.min(offline.length, 5) - 1 && (
+                    <div style={{ height: 1, background: 'rgba(243,240,238,0.05)', marginLeft: 16 + 56 + 14 }} />
+                  )}
                 </div>
-                {i < Math.min(offline.length, 5) - 1 && (
-                  <div style={{ height: 1, background: 'rgba(243,240,238,0.05)', marginLeft: 16 + 56 + 14 }} />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Developer Tools ── */}
-      <CategoryRow
-        title="Developer Tools"
-        subtitle="Built for builders"
-        eyebrow="Category"
-        apps={devApps.slice(0, 8)}
-        href="/category/developer"
-        variant="scroll"
-      />
+      {devApps.length > 0 && (
+        <CategoryRow
+          title="Developer Tools"
+          subtitle="Built for builders"
+          eyebrow="Category"
+          apps={devApps.slice(0, 8)}
+          href="/category/developer"
+          variant="scroll"
+        />
+      )}
 
       {/* ── Design ── */}
-      <CategoryRow
-        title="Design"
-        eyebrow="Category"
-        apps={designApps.slice(0, 6)}
-        href="/category/design"
-        variant="scroll"
-      />
+      {designApps.length > 0 && (
+        <CategoryRow
+          title="Design"
+          eyebrow="Category"
+          apps={designApps.slice(0, 6)}
+          href="/category/design"
+          variant="scroll"
+        />
+      )}
 
       {/* ── Productivity: grid ── */}
-      <section style={{ marginBottom: 48 }}>
-        <SectionHeader
-          title="Productivity"
-          eyebrow="Category"
-          href="/category/productivity"
-        />
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-            gap: 16,
-            paddingLeft: 16,
-            paddingRight: 16,
-          }}
-        >
-          {prodApps.slice(0, 6).map(app => (
-            <AppCard key={app.id} app={app} variant="grid" />
-          ))}
-        </div>
-      </section>
+      {prodApps.length > 0 && (
+        <section style={{ marginBottom: 48 }}>
+          <SectionHeader
+            title="Productivity"
+            eyebrow="Category"
+            href="/category/productivity"
+          />
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+              gap: 16,
+              paddingLeft: 16,
+              paddingRight: 16,
+            }}
+          >
+            {prodApps.slice(0, 6).map(app => (
+              <AppCard key={app.id} app={app} variant="grid" />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Submit CTA ── */}
       <div style={{ paddingLeft: 16, paddingRight: 16 }}>
